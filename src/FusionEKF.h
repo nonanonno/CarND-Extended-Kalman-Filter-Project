@@ -9,36 +9,43 @@
 #include "kalman_filter.h"
 #include "tools.h"
 
-class FusionEKF {
+/**
+ * @brief 
+ * 
+ */
+class FusionEKF
+{
 public:
   /**
-  * Constructor.
-  */
+   * @brief Construct a new Fusion E K F object
+   * 
+   */
   FusionEKF();
 
   /**
-  * Destructor.
-  */
+   * @brief Destroy the Fusion E K F object
+   * 
+   */
   virtual ~FusionEKF();
 
   /**
-  * Run the whole flow of the Kalman Filter from here.
-  */
+   * @brief Run the whole flow of the Kalman Filter from here.
+   * 
+   * @param measurement_pack 
+   */
   void ProcessMeasurement(const MeasurementPackage &measurement_pack);
 
   /**
-  * Kalman Filter update and prediction math lives in here.
-  */
+   * @brief Run the whole flow of the Kalman Filter from here.
+   * 
+   */
   KalmanFilter ekf_;
 
 private:
-  // check whether the tracking toolbox was initialized or not (first measurement)
-  bool is_initialized_;
+  bool is_initialized_; //!< check whether the tracking toolbox was initialized or not (first measurement)
 
-  // previous timestamp
   long long previous_timestamp_;
 
-  // tool object used to compute Jacobian and RMSE
   Tools tools;
   Eigen::MatrixXd R_laser_;
   Eigen::MatrixXd R_radar_;

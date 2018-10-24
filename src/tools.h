@@ -7,28 +7,37 @@ using Eigen::MatrixXd;
 using Eigen::VectorXd;
 using namespace std;
 
-class Tools {
+class Tools
+{
 public:
   /**
-  * Constructor.
-  */
+   * @brief Construct a new Tools object
+   * 
+   */
   Tools();
 
   /**
-  * Destructor.
-  */
+   * @brief Destroy the Tools object
+   * 
+   */
   virtual ~Tools();
 
   /**
-  * A helper method to calculate RMSE.
-  */
+   * @brief A helper method to calculate RMSE.
+   * 
+   * @param estimations 
+   * @param ground_truth 
+   * @return VectorXd 
+   */
   VectorXd CalculateRMSE(const vector<VectorXd> &estimations, const vector<VectorXd> &ground_truth);
 
   /**
-  * A helper method to calculate Jacobians.
-  */
-  MatrixXd CalculateJacobian(const VectorXd& x_state);
-
+   * @brief A helper method to calculate Jacobians.
+   * 
+   * @param x_state 
+   * @return MatrixXd 
+   */
+  MatrixXd CalculateJacobian(const VectorXd &x_state);
 };
 
 #endif /* TOOLS_H_ */
