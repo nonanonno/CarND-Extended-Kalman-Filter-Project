@@ -3,41 +3,25 @@
 #include <vector>
 #include "Eigen/Dense"
 
-using Eigen::MatrixXd;
-using Eigen::VectorXd;
-using namespace std;
-
-class Tools
+namespace Tools
 {
-public:
-  /**
-   * @brief Construct a new Tools object
-   * 
-   */
-  Tools();
 
-  /**
-   * @brief Destroy the Tools object
-   * 
-   */
-  virtual ~Tools();
-
-  /**
+/**
    * @brief A helper method to calculate RMSE.
    * 
    * @param estimations 
    * @param ground_truth 
    * @return VectorXd 
    */
-  VectorXd CalculateRMSE(const vector<VectorXd> &estimations, const vector<VectorXd> &ground_truth);
+Eigen::VectorXd CalculateRMSE(const std::vector<Eigen::VectorXd> &estimations, const std::vector<Eigen::VectorXd> &ground_truth);
 
-  /**
+/**
    * @brief A helper method to calculate Jacobians.
    * 
    * @param x_state 
    * @return MatrixXd 
    */
-  MatrixXd CalculateJacobian(const VectorXd &x_state);
-};
+Eigen::MatrixXd CalculateJacobian(const Eigen::VectorXd &x_state);
+} // namespace Tools
 
 #endif /* TOOLS_H_ */

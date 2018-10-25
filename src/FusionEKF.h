@@ -26,7 +26,7 @@ public:
    * @brief Destroy the Fusion E K F object
    * 
    */
-  virtual ~FusionEKF();
+  virtual ~FusionEKF() = default;
 
   /**
    * @brief Run the whole flow of the Kalman Filter from here.
@@ -46,7 +46,6 @@ private:
 
   long long previous_timestamp_;
 
-  Tools tools;
   Eigen::MatrixXd R_laser_;
   Eigen::MatrixXd R_radar_;
   Eigen::MatrixXd H_laser_;
