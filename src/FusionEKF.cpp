@@ -90,11 +90,14 @@ void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack)
   float noise_ay = 5;
   auto dt = (measurement_pack.timestamp_ - previous_timestamp_) / 1000000.0;
   previous_timestamp_ = measurement_pack.timestamp_;
+  auto dt4 = pow(dt, 4);
+  auto dt3 = pow(dt, 3);
+  auto dt2 = pow(dt, 2);
   ekf_.Q_ = MatrixXd(4, 4);
-  ekf_.Q_ << pow(dt, 4) * noise_ax / 4, 0, pow(dt, 3) * noise_ax / 2, 0,
-      0, pow(dt, 4) * noise_ay / 4, 0, pow(dt, 3) * noise_ay / 2,
-      pow(dt, 3) * noise_ax / 2, 0, dt * dt * noise_ax, 0,
-      0, pow(dt, 3) * noise_ay / 2, 0, dt * dt * noise_ay;
+  ekf_.Q_ << dt4 * noise_ax / 4, 0, dt3 * noise_ax / 2, 0,
+      0, dt4 * noise_ay / 4, 0, dt3 * noise_ay / 2,
+      dt3 * noise_ax / 2, 0, dt2 * noise_ax, 0,
+      0, dt3 * noise_ay / 2, 0, dt2 * noise_ay;
 
   ekf_.Predict(dt);
 
@@ -126,7 +129,6 @@ void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack)
   }
 
   // print the output
-  //cout << "x_ = " << ekf_.x_ << endl;
-  //  cout << "P_ = " << ekf_.P_ << endl;
-  std::cout << "x_= [" << ekf_.x_(0) << ", " << ekf_.x_(1) << ", " << ekf_.x_(2) << ", " << ekf_.x_(3) << "]" << std::endl;
+  cout << "x_ = " << ekf_.x_ << endl;
+  cout << "P_ = " << ekf_.P_ << endl;
 }
